@@ -1,2 +1,0 @@
-# singularity
-Singularity containers scripts
