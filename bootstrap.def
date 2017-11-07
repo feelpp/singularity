@@ -98,7 +98,8 @@ SEE ALSO:
     fi
 
 %test
-    feelpp_qs_laplacian_2d --config-file=/opt/feelpp/Testcases/quickstart/laplacian/circle/circle-all.cfg --exporter.export=0
+    # Section that should be updated with ctest.
+    feelpp_qs_laplacian_2d --config-file=/opt/feelpp/Testcases/quickstart/laplacian/circle/circle-all.cfg --checker.tolerance.exact=5.e-14
 
 %environment
     white=`tput setaf 7`

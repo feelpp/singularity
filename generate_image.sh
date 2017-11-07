@@ -12,5 +12,5 @@ if [ ! -f "${BOOTSTRAPDIR}/${BOOTSTRAPFILE}" ]; then
     exit 1
 fi
 
-# MUST BE SUDO HERE!
-sudo -E ${SINGULARITY_BIN} -vvv build --force --notest "${IMAGEDIR}/${SINGULARITYIMAGE}" "${BOOTSTRAPDIR}/${BOOTSTRAPFILE}"
+# MUST BE SUDO HERE! (--notest to not run test, --section to rebuild only a %section ).
+sudo -E ${SINGULARITY_BIN} -vvv build --force "${IMAGEDIR}/${SINGULARITYIMAGE}" "${BOOTSTRAPDIR}/${BOOTSTRAPFILE}"
