@@ -13,4 +13,4 @@ if [ ! -f "${BOOTSTRAPDIR}/${BOOTSTRAPFILE}" ]; then
 fi
 
 # MUST BE SUDO HERE! (--notest to not run test, --section to rebuild only a %section ).
-sudo -E ${SINGULARITY_BIN} -vvv build --force "${IMAGEDIR}/${SINGULARITYIMAGE}" "${BOOTSTRAPDIR}/${BOOTSTRAPFILE}"
+sudo -E ${SINGULARITY_BIN} -vvv build --force --notest "${IMAGEDIR}/${SINGULARITYIMAGE}" "${BOOTSTRAPDIR}/${BOOTSTRAPFILE}"
