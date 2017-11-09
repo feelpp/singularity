@@ -20,15 +20,20 @@ NOTES:
 
 
 EXAMPLES:
+    List availailable apps
+	$ singularity apps <image-name>
+
+    Run an application (demo):
+        $ singularity run --app demo <image-name>
 
     Sequential run:
-	$ singularity exec feelpp_qs_laplacian_2d
+	$ singularity exec <image-name> feelpp_qs_laplacian_2d
 
     Parallel run:
-	$ mpirun -np 4 singularity exec feelpp_qs_laplacian_2d
+	$ mpirun -np 4 singularity exec <image-name> feelpp_qs_laplacian_2d
 
     Toolbox run (CSM):
-	$ singularity exec feelpp_toolbox_solid_3d --config-file \
+	$ singularity exec <image-name> feelpp_toolbox_solid_3d --config-file \
 	$     /opt/feelpp/Testcases/CSM/torsionbar/torsionbar.cfg
 
 SEE ALSO:
@@ -83,8 +88,9 @@ SEE ALSO:
     exit 0
 
 %runscript
-    echo "Arguments received: $*"
-    exec /usr/bin/python "$@"
+    echo "type: singularity help <image-name>"
+    #echo "Arguments received: $*"
+    #exec /usr/bin/python "$@"
 
 
 %startscript
@@ -118,4 +124,24 @@ SEE ALSO:
     LD_LIBRARY_PATH=${FEELPP_DEP_INSTALL_PREFIX}/lib:${FEELPP_DEP_INSTALL_PREFIX}/lib/paraview-5.3:$LD_LIBRARY_PATH
     PKG_CONFIG_PATH=${FEELPP_DEP_INSTALL_PREFIX}/lib/pkgconfig:$PKG_CONFIG_PATH
     PYTHONPATH=${FEELPP_DEP_INSTALL_PREFIX}/lib/python2.7/site-packages:${FEELPP_DEP_INSTALL_PREFIX}/lib/paraview-5.3/site-packages:$PYTHONPATH
-    MANPATH=${FEELPP_DEP_INSTALL_PREFIX}/share/man:$MANPATH                                                             
+    MANPATH=${FEELPP_DEP_INSTALL_PREFIX}/share/man:$MANPATH
+
+%apprun demo
+    APP1=`which feelpp_qs_laplacian_2d`
+    APP2=`which feelpp_mesh_partitioner`
+    VIEWER=`which paraview`
+    NP=2
+    unset FEELPP_REPOSITORY
+    if [ ! -z "${APP1}" ]; then
+        echo "Running Feel++ demonstration 'qs_laplacian_2d' with paraview visualisation on 2 cores."
+        mpirun -np $NP feelpp_qs_laplacian_2d --config-file=/opt/feelpp/Testcases/quickstart/laplacian/circle/circle-all.cfg --checker.tolerance.exact=5.e-14
+        if [ ! -z "${VIEWER}" ]; then
+            paraview ~/feel/qs_laplacian/circle-all/np_${NP}/exports/ensightgold/qs_laplacian/qs_laplacian.case
+        fi
+    else
+        echo "Nothing to show for this image!"
+    fi
+
+
+
+
