@@ -13,5 +13,5 @@ source include_path.sh
 # Copy (overide) generated images in the repository.
 echo "-- Move Feel++ singularity images ${SINGULARITYIMAGE} to FTP directory: ${FTPDIR}"
 if [ ! -z ${FTPDIR} ]; then
-    mv "${IMAGEDIR}/${SINGULARITYIMAGE}" "${FTPDIR}/${SINGULARITYIMAGE}"
+    rsync --remove-source-files "${IMAGEDIR}/${SINGULARITYIMAGE}" "${FTPDIR}/${SINGULARITYIMAGE}"
 fi

@@ -23,7 +23,7 @@ else
 fi
 
 # Move (overide) generated images in the repository.
-mv "${IMAGEDIR}/${SINGULARITYIMAGE}" "${REPO_NAME}/${SINGULARITYIMAGE}"
+rsync --remove-source-files "${IMAGEDIR}/${SINGULARITYIMAGE}" "${REPO_NAME}/${SINGULARITYIMAGE}"
 
 cd ${REPO_NAME}
 echo "-- Push Feel++ singularity images"
