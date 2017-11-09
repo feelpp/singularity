@@ -33,6 +33,12 @@ ROOTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/" && pwd )"
 BOOTSTRAPDIR=${ROOTDIR}/images/${BASE}/${IMAGE}/${TAG}
 BOOTSTRAPFILE=Singularity
 IMAGEDIR=$BOOTSTRAPDIR
+FTPDIR=""
+if [ ! -z "${FTP_SINGULARITY_IMAGES_DIR}" ]
+    FTPDIR=${FTP_SINGULARITY_IMAGES_DIR}
+else
+    echo "singularity ftp directory not set! (export FTP_SINGULARITY_IMAGES_DIR=/path/to/ftp)"
+fi
 
 SINGULARITYIMAGE=singularity_${BASE}_${IMAGE}-${TAG}.img
 
