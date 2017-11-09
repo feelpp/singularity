@@ -4,6 +4,7 @@
 #
 # The environment variable FTP_SINGULARITY_IMAGES_DIR has to be set system wide!
 #
+# Usage: ./push_image_lfs_server.sh <image:branch>
 
 set -euo pipefail
 
