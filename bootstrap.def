@@ -136,7 +136,7 @@ SEE ALSO:
         echo "Running Feel++ demonstration 'qs_laplacian_2d' with paraview visualisation on 2 cores."
         mpirun -np $NP feelpp_qs_laplacian_2d --config-file=/opt/feelpp/Testcases/quickstart/laplacian/circle/circle-all.cfg --checker.tolerance.exact=5.e-14
         if [ ! -z "${VIEWER}" ]; then
-            paraview ~/feel/qs_laplacian/circle-all/np_${NP}/exports/ensightgold/qs_laplacian/qs_laplacian.case
+            paraview ${FEELPP_REPOSITORY}/qs_laplacian/circle-all/np_${NP}/exports/ensightgold/qs_laplacian/qs_laplacian.case
         fi
     else
         echo "Nothing to show for this image!"
