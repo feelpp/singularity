@@ -31,7 +31,7 @@ fi
 BASEIMAGETAG=${BASE}/${IMAGE}:${TAG}
 ROOTDIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/" && pwd )"
 BOOTSTRAPDIR=${ROOTDIR}/images/${BASE}/${IMAGE}/${TAG}
-BOOTSTRAPFILE=Singularity
+BOOTSTRAPFILE=Singularity.${IMAGE}-${TAG}
 IMAGEDIR=$BOOTSTRAPDIR
 FTPDIR=""
 if [ ! -z "${FTP_SINGULARITY_IMAGES_DIR}" ]; then
