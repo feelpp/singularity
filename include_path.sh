@@ -40,7 +40,7 @@ else
     echo "singularity ftp directory not set! (export FTP_SINGULARITY_IMAGES_DIR=/path/to/ftp)"
 fi
 
-SINGULARITYIMAGE=singularity_${BASE}_${IMAGE}-${TAG}.simg
+SINGULARITYIMAGE=${BASE}_${IMAGE}-${TAG}.simg
 
 # DEBUG
 #echo $BASEIMAGETAG
