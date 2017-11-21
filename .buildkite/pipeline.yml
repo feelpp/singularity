@@ -1,0 +1,17 @@
+steps:
+ - name: ":hammer:Generate bootstrap"
+   command: steps/bootstrap.sh
+   label: ":singularity: Feel++ singularity bootstrap"
+   agents:
+     singularity: true
+ - wait
+ - name: ":hammer:Generate images"
+   command: steps/images.sh
+   label: ":singularity: Feel++ singularity images"
+   agents:
+     singularity: true
+ - wait
+ - name: ':rocket: Deploy images'
+   command: steps/push.sh
+   agents:
+     singularity: true
