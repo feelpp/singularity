@@ -5,7 +5,7 @@
 #
 # The following environment variable must be set to push images:
 #   GIRDER_TOKEN
-#   GIRDER_URL
+#   GIRDER_REPO_URL
 #
 # Usage: $push_image -g <girder_parent_folder_id> <base/image:tag>
 #
