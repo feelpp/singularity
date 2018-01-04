@@ -23,8 +23,10 @@ EXAMPLES:
     List availailable apps
 	$ singularity apps <image-name>
 
-    Run an application (demo):
-        $ singularity run --app demo <image-name>
+    Run an application (feelpp_qs_laplacian_2d):
+        $ singularity run --app feelpp_qs_laplacian_2d <image-name>
+        $ singularity run --app view_feelpp_qs_laplacian_2d <image-name>
+        $ singularity run --app paraview <image-name>
 
     Sequential run:
 	$ singularity exec <image-name> feelpp_qs_laplacian_2d
@@ -68,14 +70,15 @@ SEE ALSO:
     sed -i 's/.*PS1 *=.*//g' /.singularity.d/env/99-base.sh
     sed -i 's/.*HOME *=.*//g' /.singularity.d/env/10-docker.sh
     mkdir -p /feel
+    mkdir -p /scratch
     chmod 777 /feel
-    mv /home/feelpp /opt/feelpp
+#   mv /home/feelpp /opt/feelpp
     userdel feelpp
-    chown -R root:root /opt/feelpp
-    chmod -R 777 /opt/feelpp
-    
-    # Clean temporary files. 
-    rm -rf `find /opt/feelpp -name ".*" ! -path .`
+#    chown -R root:root /opt/feelpp
+#    chmod -R 777 /opt/feelpp
+
+    # Clean temporary files.
+#    rm -rf `find /opt/feelpp -name ".*" ! -path .`
 
     echo "alias ls='ls --color=auto'" >> /etc/bash.bashrc
     echo "alias ll='ls -ls'" >> /etc/bash.bashrc
@@ -116,7 +119,7 @@ SEE ALSO:
     escright="\]" #`if [ "${SHELL##*/}" == "bash" ]; then echo '\]'; fi`
     USER=`id -un`
     HOSTNAME=`hostname`
-    
+
     SINGULARITY_SHELL=bash
     FEELPP_TUTORIAL=/opt/feelpp
     PS1="${escleft}${bold}${white}${escright}[singularity]:${escleft}${cyan}${escright} ${USER}@${HOSTNAME}${escleft}${reset}${escright}:\w> "
@@ -128,20 +131,36 @@ SEE ALSO:
 
 %apprun demo
     APP1=`which feelpp_qs_laplacian_2d`
-    APP2=`which feelpp_mesh_partitioner`
-    VIEWER=`which paraview`
-    NP=2
     export FEELPP_REPOSITORY=${HOME}/feel/singularity
+    mkdir -p ${FEELPP_REPOSITORY}
     if [ ! -z "${APP1}" ]; then
         echo "Running Feel++ demonstration 'qs_laplacian_2d' with paraview visualisation on 2 cores."
-        mpirun -np $NP feelpp_qs_laplacian_2d --config-file=/opt/feelpp/Testcases/quickstart/laplacian/circle/circle-all.cfg --checker.tolerance.exact=5.e-14
-        if [ ! -z "${VIEWER}" ]; then
-            paraview ${FEELPP_REPOSITORY}/qs_laplacian/circle-all/np_${NP}/exports/ensightgold/qs_laplacian/qs_laplacian.case
-        fi
+        ${APP1} --config-file=/opt/feelpp/Testcases/quickstart/laplacian/circle/circle-all.cfg --checker.tolerance.exact=5.e-14 "$@"
     else
-        echo "Nothing to show for this image!"
+        echo "No demo available for this image!"
     fi
 
+%apprun view_demo
+    VIEWER=`which paraview`
+    export FEELPP_REPOSITORY=${HOME}/feel/singularity
+    CASE=${FEELPP_REPOSITORY}/qs_laplacian/circle-all/np_1/exports/ensightgold/qs_laplacian/qs_laplacian.case
+    mkdir -p ${FEELPP_REPOSITORY}
+    if [ ! -f "${CASE}" ]; then
+        if [ ! -z "${VIEWER}" ]; then
+            paraview "$@" ${FEELPP_CASE}
+        else
+	    echo "No viewer available in the current image!"
+	    exit 0
+        fi
+    else
+        echo "Nothing to visualize!"
+    fi
 
-
-
+%apprun paraview
+    VIEWER=`which paraview`
+    if [ ! -z "${VIEWER}" ]; then
+        paraview "$@"
+    else
+        echo "No viewer available in the current image!"
+        exit 0
+    fi
