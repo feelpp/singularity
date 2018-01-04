@@ -1,2 +1,7 @@
 *.img
 *.simg
+/images/*
+!/images/feelpp/feelpp-base/*
+!/images/feelpp/feelpp-libs/*
+!/images/feelpp/feelpp-crb/*
+!/images/feelpp/feelpp-toolboxes/*
