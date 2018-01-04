@@ -1,11 +1,11 @@
 steps:
- - name: ":hammer:Generate bootstrap"
-   command: .buildkite/steps/bootstrap.sh
+ - name: ":hammer: Generate recipes"
+   command: .buildkite/steps/recipes.sh
    label: ":singularity: Feel++ singularity bootstrap"
    agents:
      singularity: true
  - wait
- - name: ":hammer:Generate images"
+ - name: ":hammer: Generate images"
    command: .buildkite/steps/images.sh
    label: ":singularity: Feel++ singularity images"
    agents:

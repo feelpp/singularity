@@ -8,19 +8,19 @@ You will find two scripts to generate the bootstrap files for feel++ container
 images and to generate the singularity image.
 
 ```
-./generate_bootstrap.sh <dochub>
+./generate_recipe.sh <dochub>
 ./generate_image.sh <dochub>
 ```
 
 For example to generate `feelpp/feelpp-toolboxes`, just do
 
 ```
-./generate_bootstrap.sh feelpp/feelpp-toolboxes
+./generate_recipe.sh feelpp/feelpp-toolboxes
 ./generate_image.sh feelpp/feelpp-toolboxes
 ```
 
 TIP: Bootstrap and image are generated in the corresponding container folder at
-the root of the reposity. For example `/feelpp-toolboxes`
+the root of the reposity under `/images`.
 
 == Download images
 
@@ -36,11 +36,10 @@ Singularityhub trigger a build from github deployment status.
 SingularityHub setting is set from `automatic` to `deployment` for
 the feelpp/singularity repository.
 
-=== ftp/http
+=== ftp/http (Girder)
 
-We provide also other methods to publish images for each. See
-book.feelpp.org for more informations.
-
+We provide also other methods to publish public and private images.
+See book.feelpp.org for more informations.
 
 == Continuous integration (CI)
 
@@ -53,12 +52,23 @@ cron job to tell singularityhub to trigger new builds.
 
 Images are also builds from our own cluster nightly using buildkite CI.
 See `.buildkite/pipeline.yml`
-
+These images are available on our Girder server (girder.math.unistra.fr)
 
 === Add new images
 
 Singularity recipes are based on docker images. These images are tested
 by another CI pipeline.
-Just add a container name in the `.buildkite/list` for buildkite CI.
+Just add a container name in the `.buildkite/container.yml` for buildkite CI.
 Trigger a new container manually from the singularity interface for
 singularity hub precising the path to the recipe.
+
+TIP: Recipes are customized and might not work for all kind of docker images!
+
+== FAQ
+
+=== Buildkite CI RET255 error
+
+Sometimes singularity build crash with `RET255` error. Most of the time,
+you only need to clear the cache on the agent (by default `/root/.singularity/`
+or better ``$SINGULARITY_CACHEDIR` directory)
+

@@ -1,0 +1,19 @@
+public:
+  feelpp:
+    girder_folder_id: 5a3acb65b0e95712d3c51c3c
+    containers:
+      - feelpp/feelpp-libs:latest
+      - feelpp/feelpp-base:latest
+      - feelpp/feelpp-crb:latest
+      - feelpp/feelpp-toolboxes:latest
+
+private:
+  hifimagnet:
+    girder_folder_id: 5a3acb6fb0e95712d3c51c3d
+    containers:
+      - feelpp/hifimagnet:latest
+  eye2brain:
+    girder_folder_id: 5a3acb7eb0e95712d3c51c3e
+    containers:
+      - feelpp/eye2brain:latest
+
