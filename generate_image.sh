@@ -12,5 +12,9 @@ if [ ! -f "${SIMG_RECIPE_DIR}/${SIMG_RECIPE}" ]; then
     exit 1
 fi
 
+if [ -f ${SIMG_DIR}/${SIMG} ]; then
+    rm -rf ${SIMG_DIR}/${SIMG}
+fi
+
 # MUST BE SUDO HERE! (--notest to not run test, --section to rebuild only a %section ).
 sudo -E ${SINGULARITY_BIN} -vvv build --force --notest "${SIMG_DIR}/${SIMG}" "${SIMG_RECIPE_DIR}/${SIMG_RECIPE}"
