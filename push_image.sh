@@ -11,7 +11,7 @@
 #
 # Requirements: jq / yq  tools
 
-set -x
+#set -x
 set -euo pipefail
 
 source include.sh
