@@ -11,7 +11,7 @@ private:
   hifimagnet:
     girder_folder_id: 5a3acb6fb0e95712d3c51c3d
     containers:
-      - feelpp/hifimagnet:latest
+      - feelpp/hifimagnet:develop-yakkety
   eye2brain:
     girder_folder_id: 5a3acb7eb0e95712d3c51c3e
     containers:
