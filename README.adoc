@@ -54,6 +54,12 @@ Images are also builds from our own cluster nightly using buildkite CI.
 See `.buildkite/pipeline.yml`
 These images are available on our Girder server (girder.math.unistra.fr)
 
+IMPORTANT: if the `latest` tag is specified, then the image will be generated
+with a tag following the regex for
+`<branch>-v<major>.<minor>.<patch>-<rc>.<version>-<os>-<major>.<minor>`
+for example `develop-v0.104.0-alpha.3-ubuntu-16.04`.
+This works only for feel++ image!
+
 === Add new images
 
 Singularity recipes are based on docker images. These images are tested

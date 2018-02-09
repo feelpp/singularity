@@ -51,7 +51,54 @@ TAG=`echo "${BASE_IMG_TAG}" | sed "s/.*://"`
 if [ ! -n "$TAG" ] || [ "${TAG}" == "${IMG}" ]; then
     TAG=latest
 fi
+# Transform the generic tag latest into the long version.
+# Regex for the desired tag name
+# for example: develop-v0.104.0-alpha.3-ubuntu-16.04
+# Note: we retrieve the list of tag for the image, compare those which have the
+# same digest than latest, and keep the one which has the desire regex expression.
+# If the tag expr is not found, we keep the current latest tag.
+dhub_token()
+{
+    DHUB_TOKEN=`curl -u ${DOCKER_LOGIN}:${DOCKER_PASSWORD} -s "https://auth.docker.io/token?service=registry.docker.io&scope=repository:${BASE}/${IMG}:pull" | jq -r .token`
+    export DHUB_TOKEN
+}
 
+dhub_tag_list()
+{
+    DHUB_TAG_LIST=`curl -s -H "Authorization: Bearer ${DHUB_TOKEN}" https://index.docker.io/v2/${BASE}/${IMG}/tags/list | jq -rc ".tags[]"`
+    export DHUB_TAG_LIST
+}
+
+# dhub_tag_digest <tag>
+dhub_tag_digest()
+{
+    DHUB_TAG_DIGEST=`curl -s -vvv -X GET \
+        -H "Authorization: Bearer ${DHUB_TOKEN}" \
+        -H "Accept: application/vnd.docker.distribution.manifest.v2+json" \
+        https://index.docker.io/v2/${BASE}/${IMG}/manifests/$1 2>&1 \
+        | grep "Docker-Content-Digest" \
+        | sed -E "s/.*Docker-Content-Digest: *(.*)/\1/"`
+    export DHUB_TAG_DIGEST
+}
+
+TAGEXPR=".*-v[0-9]*(.[0-9]*)*-.*(.[0-9]*)*-.*-[0-9]*(.[0-9]*)*.*"
+if [ "${BASE}" == "feelpp" ]\
+    && [ "${TAG}" == "latest" ]\
+   || [ "${TAG}" == "master" ]\
+   || [ "${TAG}" == "develop" ]; then
+    dhub_token
+    dhub_tag_list
+    dhub_tag_digest ${TAG}
+    LATEST_DIGEST=${DHUB_TAG_DIGEST}
+    echo "Checking all tag related to ${TAG}..."
+    for tag in $DHUB_TAG_LIST; do
+        dhub_tag_digest ${tag}
+        if [ "${LATEST_DIGEST}" == "${DHUB_TAG_DIGEST}" ]; then
+            echo "${tag}: ${DHUB_TAG_DIGEST}"
+            [[ "${tag}" =~ ^${TAGEXPR}$ ]] && TAG=${tag}
+        fi
+    done
+fi
 BASE_IMG_TAG=${BASE}/${IMG}:${TAG}
 
 # Singularity image.
@@ -59,3 +106,5 @@ SIMG_RECIPE_DIR=${ROOT_DIR}/images/${BASE}/${IMG}/${TAG}
 SIMG_RECIPE=Singularity.${IMG}-${TAG}
 SIMG_DIR=${SIMG_RECIPE_DIR}
 SIMG=${BASE}_${IMG}-${TAG}.simg
+
+

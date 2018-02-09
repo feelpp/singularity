@@ -6,7 +6,8 @@
 
 source include.sh
 
-echo "Using docker image: ${IMG}"
+echo "Using docker image: ${BASE}/${IMG}:${TAG}"
+exit 0
 mkdir -p ${SIMG_RECIPE_DIR}
 echo "Generate recipe file: ${SIMG_RECIPE_DIR}/${SIMG_RECIPE}"
 cat ./recipe | sed "s/From:.*$/From: ${BASE}\/${IMG}:${TAG}/g" > "${SIMG_RECIPE_DIR}/${SIMG_RECIPE}"
