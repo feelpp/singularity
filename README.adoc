@@ -1,6 +1,6 @@
 = Singularity container
 
-	[![Build status](https://badge.buildkite.com/93b420065f76121c5bd720bf8d454c91b77658df278c7a96d9.svg)](https://buildkite.com/feelpp/feelpp-singularity)
+https://badge.buildkite.com/93b420065f76121c5bd720bf8d454c91b77658df278c7a96d9.svg[https://buildkite.com/feelpp/feelpp-singularity]
 
 == Generate singularity image
 
