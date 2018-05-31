@@ -4,6 +4,8 @@
 # Usage: ./generate_bootstrap.sh <image:branch>
 #
 
+set -e
+
 usage(){
 	echo "Usage: $0 [ <options> ] <base/image:tag>"
 	echo ""
@@ -106,5 +108,4 @@ SIMG_RECIPE_DIR=${ROOT_DIR}/images/${BASE}/${IMG}/${TAG}
 SIMG_RECIPE=Singularity.${IMG}-${TAG}
 SIMG_DIR=${SIMG_RECIPE_DIR}
 SIMG=${BASE}_${IMG}-${TAG}.simg
-
 
