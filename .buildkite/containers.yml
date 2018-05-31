@@ -6,10 +6,10 @@ public:
       - feelpp/feelpp-base:latest
       - feelpp/feelpp-crb:latest
       - feelpp/feelpp-toolboxes:latest
-  salome:
-    girder_folder_id: 5a4fa9f1b0e9571f842931f2
-    containers:
-      - trophime/salome-8.3.0:nvidia
+#  salome:
+#    girder_folder_id: 5a4fa9f1b0e9571f842931f2
+#    containers:
+#      - trophime/salome-8.4.0:nvidia
 
 private:
   hifimagnet:
