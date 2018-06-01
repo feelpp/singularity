@@ -10,8 +10,12 @@ steps:
    label: ":singularity: Feel++ singularity images"
    agents:
      singularity: true
+   env:
+       BUILDKITE_GIT_CLEAN_FLAGS: "-fdq"
  - wait
  - name: ':rocket: Deploy images'
    command: .buildkite/steps/push.sh
    agents:
      singularity: true
+   env:
+       BUILDKITE_GIT_CLEAN_FLAGS: "-fdq"
