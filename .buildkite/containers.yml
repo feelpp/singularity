@@ -11,7 +11,7 @@ public:
 #    containers:
 #      - trophime/salome-8.4.0:nvidia
 
-private:
+#private:
 #  hifimagnet:
 #    girder_folder_id: 5a4fa929b0e9571f842931e7
 #    containers:
