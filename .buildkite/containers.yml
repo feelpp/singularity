@@ -2,9 +2,9 @@ public:
   feelpp:
     girder_folder_id: 5a4fa90ab0e9571f842931e5
     containers:
-      - feelpp/feelpp-libs:latest
-      - feelpp/feelpp-base:latest
-      - feelpp/feelpp-crb:latest
+#      - feelpp/feelpp-libs:latest
+#      - feelpp/feelpp-base:latest
+#      - feelpp/feelpp-crb:latest
       - feelpp/feelpp-toolboxes:latest
 #  salome:
 #    girder_folder_id: 5a4fa9f1b0e9571f842931f2
@@ -12,12 +12,11 @@ public:
 #      - trophime/salome-8.4.0:nvidia
 
 private:
-  hifimagnet:
-    girder_folder_id: 5a4fa929b0e9571f842931e7
-    containers:
-      - feelpp/hifimagnet:develop-yakkety
-  eye2brain:
-    girder_folder_id: 5a4fa948b0e9571f842931ea
-    containers:
-      - feelpp/eye2brain:latest
-
+#  hifimagnet:
+#    girder_folder_id: 5a4fa929b0e9571f842931e7
+#    containers:
+#      - feelpp/hifimagnet:develop-yakkety
+#  eye2brain:
+#    girder_folder_id: 5a4fa948b0e9571f842931ea
+#    containers:
+#      - feelpp/eye2brain:latest
