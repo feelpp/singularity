@@ -79,11 +79,6 @@ SEE ALSO:
 
     # Clean temporary files.
 #    rm -rf `find /opt/feelpp -name ".*" ! -path .`
-
-    echo "alias ls='ls --color=auto'" >> /etc/bash.bashrc
-    echo "alias ll='ls -ls'" >> /etc/bash.bashrc
-    echo "alias grep='grep --color'" >> /etc/bash.bashrc
-
     PACKAGES="dapl2-utils libdapl-dev libdapl2 libibverbs1 librdmacm1 libcxgb3-1 libipathverbs1 libmlx4-1 libmlx5-1 libmthca1 libnes1 libpmi0 libpmi0-dev"
     apt-get update
     apt-get -y --allow-unauthenticated install $PACKAGES
