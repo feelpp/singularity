@@ -6,8 +6,8 @@ steps:
      singularity: true
    env:
      PROJECT: "${PROJECT:-feelpp-toolboxes}"
-     TAG: "${TAG:-${BUILDKITE_BRANCH}}"
-#     GIRDER_ID: "${GIRDER_ID:-5a4fa90ab0e9571f842931e5}"
+     TAG: "${TAG:-develop}"
+     GIRDER_ID: "${GIRDER_ID:-\"5a4fa90ab0e9571f842931e5\"}"
  - wait
  - name: ":hammer: Generate image"
    command: .buildkite/steps/image.sh
@@ -17,7 +17,7 @@ steps:
    env:
        BUILDKITE_GIT_CLEAN_FLAGS: "-fdq"
        PROJECT: "${PROJECT:-feelpp-toolboxes}"
-       TAG: "${TAG:-${BUILDKITE_BRANCH}}"
+       TAG: "${TAG:-develop}"
 # GIRDER_ID: "${GIRDER_ID:-5a4fa90ab0e9571f842931e5}"
  - wait
  - name: ':rocket: Deploy ${PROJECT:-feelpp-toolboxes} images'
@@ -27,5 +27,5 @@ steps:
    env:
        BUILDKITE_GIT_CLEAN_FLAGS: "-fdq"
        PROJECT: "${PROJECT:-feelpp-toolboxes}"
-       TAG: "${TAG:-${BUILDKITE_BRANCH}}"
+       TAG: "${TAG:-develop}"
        #GIRDER_ID: "${GIRDER_ID:-5a4fa90ab0e9571f842931e5}"
