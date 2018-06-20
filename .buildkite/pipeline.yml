@@ -7,7 +7,6 @@ steps:
    env:
      PROJECT: "${PROJECT:-feelpp-toolboxes}"
      TAG: "${TAG:-${BUILDKITE_BRANCH}}"
-     GIRDER_ID: "${GIRDER_ID:-5a4fa90ab0e9571f842931e5}"
  - wait
  - name: ":hammer: Generate image"
    command: .buildkite/steps/image.sh
