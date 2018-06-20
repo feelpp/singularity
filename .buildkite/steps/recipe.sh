@@ -12,7 +12,9 @@ set -euo pipefail
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/" && pwd )"
 source ${SCRIPT_DIR}/include.sh
 
-CONTAINER="feelpp/${PROJECT}:${TAG}" 
-
-echo "Generate recipe: ${CONTAINER} to girder folder with ID: ${GIRDER_ID}"
-./generate_recipe.sh -g ${GIRDER_ID} ${CONTAINER}
+PROJECT=`sed -e 's/^"//' -e 's/"$//' <<<"${PROJECT}"`
+for i in ${PROJECT}; do 
+    CONTAINER="feelpp/${i}:${TAG}"
+    echo "Generate recipe: ${CONTAINER} to girder folder with ID: ${GIRDER_ID}"
+    ./generate_recipe.sh -g ${GIRDER_ID} ${CONTAINER}
+done
