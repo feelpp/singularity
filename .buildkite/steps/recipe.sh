@@ -6,12 +6,13 @@
 # The "container.yml" is parsed, then containers are pushed in the
 # parent folder girder id.
 
-#set -x
+set -x
 set -euo pipefail
 
 SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/" && pwd )"
 source ${SCRIPT_DIR}/include.sh
 
-CONTAINER="feelpp/${PROJECT}:${TAG}"
-echo "push: ${CONTAINER} to girder public with ID: ${GIRDER_ID}"
-./push_image.sh -g ${GIRDER_ID} ${CONTAINER}
+CONTAINER="feelpp/${PROJECT}:${TAG}" 
+
+echo "Generate recipe: ${CONTAINER} to girder folder with ID: ${GIRDER_ID}"
+./generate_recipe.sh -g ${GIRDER_ID} ${CONTAINER}

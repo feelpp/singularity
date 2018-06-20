@@ -13,5 +13,6 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/" && pwd )"
 source ${SCRIPT_DIR}/include.sh
 
 CONTAINER="feelpp/${PROJECT}:${TAG}"
-echo "push: ${CONTAINER} to girder public with ID: ${GIRDER_ID}"
-./push_image.sh -g ${GIRDER_ID} ${CONTAINER}
+echo "Generate image: ${CONTAINER} to girder folder with ID: ${GIRDER_ID}"
+./generate_image.sh -g ${GIRDER_ID} ${CONTAINER}
+
