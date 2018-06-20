@@ -97,7 +97,9 @@ if [ "${BASE}" == "feelpp" ]\
         dhub_tag_digest ${tag}
         if [ "${LATEST_DIGEST}" == "${DHUB_TAG_DIGEST}" ]; then
             echo "${tag}: ${DHUB_TAG_DIGEST}"
-            [[ "${tag}" =~ ^${TAGEXPR}$ ]] && TAG=${tag}
+            # [[ "${tag}" =~ ^${TAGEXPR}$ ]] && TAG=${tag}
+            TAG=${tag}
+            break
         fi
     done
 fi
