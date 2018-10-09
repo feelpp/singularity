@@ -174,9 +174,11 @@ clean_local_file()
     fi
 }
 
-
+echo "--- upload to singularity registry at cesga ${SIMG_MSO4SC_REGISTRY_NAME}:${SIMG_MSO4SC_REGISTRY_TAG}"
+SREGISTRY_CLIENT=registry
 singularity run -B /mnt $HOME/singularity/sregistry.simg push --name ${SIMG_MSO4SC_REGISTRY_NAME} --tag ${SIMG_MSO4SC_REGISTRY_TAG} ${SIMG}
 
+echo "--- upload to Girder"
 # Backup the file if it exists.
 girder_token_create
 girder_login
