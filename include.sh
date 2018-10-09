@@ -118,3 +118,5 @@ SIMG_RECIPE=Singularity.${IMG}-${TAG}
 SIMG_DIR=${SIMG_RECIPE_DIR}
 SIMG=${BASE}_${IMG}-${TAG}.simg
 
+SIMG_MSO4SC_REGISTRY_NAME="${COLLECTION:-mso4sc}/${IMG}"
+SIMG_MSO4SC_REGISTRY_TAG=v`echo ${TAG} | sed "s/.*v[0-9]*\.\([0-9]*\)\..*/\1/g"`

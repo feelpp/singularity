@@ -175,6 +175,7 @@ clean_local_file()
 }
 
 
+singularity run -B /mnt $HOME/singularity/sregistry.simg push --name ${SIMG_MSO4SC_REGISTRY_NAME} --tag ${SIMG_MSO4SC_REGISTRY_TAG} ${SIMG}
 
 # Backup the file if it exists.
 girder_token_create
