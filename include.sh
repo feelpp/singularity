@@ -64,7 +64,10 @@ dhub_token()
     DHUB_TOKEN=`curl -u ${DOCKER_LOGIN}:${DOCKER_PASSWORD} -s "https://auth.docker.io/token?service=registry.docker.io&scope=repository:${BASE}/${IMG}:pull" | jq -r .token`
     export DHUB_TOKEN
 }
-
+dhub_pull()
+{
+    docker pull "$1" 
+}
 dhub_tag_list()
 {
     DHUB_TAG_LIST=`curl -s -H "Authorization: Bearer ${DHUB_TOKEN}" https://index.docker.io/v2/${BASE}/${IMG}/tags/list | jq -rc ".tags[]"`
@@ -91,6 +94,7 @@ if [ "${BASE}" == "feelpp" ]\
     dhub_token
     dhub_tag_list
     dhub_tag_digest ${TAG}
+    
     LATEST_DIGEST=${DHUB_TAG_DIGEST}
     echo "Checking all tag related to ${TAG}..."
     for tag in $DHUB_TAG_LIST; do
@@ -104,6 +108,9 @@ if [ "${BASE}" == "feelpp" ]\
     done
 fi
 BASE_IMG_TAG=${BASE}/${IMG}:${TAG}
+
+# make sure the image is there
+dhub_pull "${BASE}/${IMG}:${TAG}"
 
 # Singularity image.
 SIMG_RECIPE_DIR=${ROOT_DIR}/images/${BASE}/${IMG}/${TAG}
