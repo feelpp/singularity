@@ -4,3 +4,4 @@ set -euo pipefail
 
 .buildkite/steps/recipe.sh
 .buildkite/steps/image.sh
+.buildkite/steps/push.sh
