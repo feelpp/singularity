@@ -102,7 +102,6 @@ girder_simg_push()
     SIMG_SIZE=`wc -c < ${SIMG_DIR}/${SIMG}`
     curl -X POST \
         -d ${GIRDER_CREDENTIALS_FILE} \
-        --progress-bar \
         --header 'Content-Type: application/json' \
         --header 'Accept: application/json' \
         --header "Girder-Token: ${GIRDER_TOKEN}" \
@@ -176,9 +175,8 @@ clean_local_file()
 
 echo "--- upload to singularity registry at cesga ${SIMG_MSO4SC_REGISTRY_NAME}:${SIMG_MSO4SC_REGISTRY_TAG}"
 SREGISTRY_CLIENT=registry
-echo "singularity run -B /mnt $HOME/singularity/sregistry.simg push --name ${SIMG_MSO4SC_REGISTRY_NAME} --tag ${SIMG_MSO4SC_REGISTRY_TAG} ${SIMG_DIR}/${SIMG}"
-ls -l ${SIMG_DIR}/${SIMG}
-singularity run -B /mnt $HOME/singularity/sregistry.simg push --name ${SIMG_MSO4SC_REGISTRY_NAME} --tag ${SIMG_MSO4SC_REGISTRY_TAG} ${SIMG_DIR}/${SIMG}
+echo "singularity run -B /mnt shub://sregistry.srv.cesga.es/mso4sc/sregistry:latest --quiet push --name ${SIMG_MSO4SC_REGISTRY_NAME} --tag ${SIMG_MSO4SC_REGISTRY_TAG} ${SIMG_DIR}/${SIMG}"
+singularity run -B /mnt shub://sregistry.srv.cesga.es/mso4sc/sregistry:latest --quiet push --name ${SIMG_MSO4SC_REGISTRY_NAME} --tag ${SIMG_MSO4SC_REGISTRY_TAG} ${SIMG_DIR}/${SIMG}
 
 echo "--- upload to Girder"
 # Backup the file if it exists.
