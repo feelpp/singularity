@@ -8,3 +8,4 @@ steps:
      PROJECT: "${PROJECT:-feelpp-toolboxes}"
      TAG: "${TAG:-develop}"
      GIRDER_ID: "${GIRDER_ID:-\"5a4fa90ab0e9571f842931e5\"}"
+     SREGISTRY_COLLECTION: "${SREGISTRY_COLLECTION:-mso4sc}"

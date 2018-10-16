@@ -66,7 +66,7 @@ dhub_token()
 }
 dhub_pull()
 {
-    docker pull "$1" 
+    docker pull "$1"
 }
 dhub_tag_list()
 {
@@ -94,7 +94,7 @@ if [ "${BASE}" == "feelpp" ]\
     dhub_token
     dhub_tag_list
     dhub_tag_digest ${TAG}
-    
+
     LATEST_DIGEST=${DHUB_TAG_DIGEST}
     echo "Checking all tag related to ${TAG}..."
     for tag in $DHUB_TAG_LIST; do
@@ -118,5 +118,5 @@ SIMG_RECIPE=Singularity.${IMG}-${TAG}
 SIMG_DIR=${SIMG_RECIPE_DIR}
 SIMG=${BASE}_${IMG}-${TAG}.simg
 
-SIMG_MSO4SC_REGISTRY_NAME="${COLLECTION:-mso4sc}/${IMG}"
+SIMG_MSO4SC_REGISTRY_NAME="${SREGISTRY_COLLECTION:-mso4sc}/${IMG}"
 SIMG_MSO4SC_REGISTRY_TAG=v`echo ${TAG} | sed "s/.*v[0-9]*\.\([0-9]*\)\..*/\1/g"`
