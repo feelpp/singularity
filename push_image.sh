@@ -174,7 +174,7 @@ clean_local_file()
 }
 
 echo "sregistry collection: $SREGISTRY_COLLECTION"
-if [ ! -z "$SREGISTRY_COLLECTION" ]; then
+if ! [[  -z "$SREGISTRY_COLLECTION" || "$SREGISTRY_COLLECTION" = "none"]]; then
 echo "--- upload to singularity registry at cesga ${SIMG_MSO4SC_REGISTRY_NAME}:${SIMG_MSO4SC_REGISTRY_TAG}"
 SREGISTRY_CLIENT=registry
 echo "singularity run shub://sregistry.srv.cesga.es/mso4sc/sregistry:latest --quiet push --name ${SIMG_MSO4SC_REGISTRY_NAME} --tag ${SIMG_MSO4SC_REGISTRY_TAG} ${SIMG_DIR}/${SIMG}"
