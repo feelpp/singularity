@@ -173,6 +173,7 @@ clean_local_file()
     fi
 }
 
+if [ ! -z "$SREGISTRY_COLLECTION" ]; then
 echo "--- upload to singularity registry at cesga ${SIMG_MSO4SC_REGISTRY_NAME}:${SIMG_MSO4SC_REGISTRY_TAG}"
 SREGISTRY_CLIENT=registry
 echo "singularity run shub://sregistry.srv.cesga.es/mso4sc/sregistry:latest --quiet push --name ${SIMG_MSO4SC_REGISTRY_NAME} --tag ${SIMG_MSO4SC_REGISTRY_TAG} ${SIMG_DIR}/${SIMG}"
@@ -181,6 +182,7 @@ if [ ! -d $HOME/singularity ]; then
 fi
 cp ${SIMG_DIR}/${SIMG} $HOME/singularity/${SIMG}
 singularity run shub://sregistry.srv.cesga.es/mso4sc/sregistry:latest --quiet push --name ${SIMG_MSO4SC_REGISTRY_NAME} --tag ${SIMG_MSO4SC_REGISTRY_TAG} $HOME/singularity/${SIMG}
+fi
 
 echo "--- upload to Girder"
 # Backup the file if it exists.
