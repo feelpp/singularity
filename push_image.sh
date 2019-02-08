@@ -173,6 +173,7 @@ clean_local_file()
     fi
 }
 
+echo "sregistry collection: $SREGISTRY_COLLECTION"
 if [ ! -z "$SREGISTRY_COLLECTION" ]; then
 echo "--- upload to singularity registry at cesga ${SIMG_MSO4SC_REGISTRY_NAME}:${SIMG_MSO4SC_REGISTRY_TAG}"
 SREGISTRY_CLIENT=registry
