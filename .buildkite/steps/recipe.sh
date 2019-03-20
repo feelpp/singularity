@@ -15,6 +15,8 @@ source ${SCRIPT_DIR}/include.sh
 PROJECT=`sed -e 's/^"//' -e 's/"$//' <<<"${PROJECT}"`
 for i in ${PROJECT}; do 
     CONTAINER="feelpp/${i}:${TAG}"
+    # ensure that the container is present
+    docker pull ${CONTAINER}
     echo "Generate recipe: ${CONTAINER} to girder folder with ID: ${GIRDER_ID}"
     ./generate_recipe.sh -g ${GIRDER_ID} ${CONTAINER}
 done
