@@ -13,6 +13,7 @@ SCRIPT_DIR="$( cd "$( dirname "${BASH_SOURCE[0]}" )/" && pwd )"
 source ${SCRIPT_DIR}/include.sh
 
 PROJECT=`sed -e 's/^"//' -e 's/"$//' <<<"${PROJECT}"`
+TAG=$(echo "${TAG}" | sed -e 's/\//-/g')
 for i in ${PROJECT}; do 
     CONTAINER="feelpp/${i}:${TAG}"
     # ensure that the container is present
