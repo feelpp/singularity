@@ -49,7 +49,7 @@ BASE_IMG_TAG="${@: -1}"
 BASE_IMG=`echo "${BASE_IMG_TAG}" | sed 's/:.*//'`
 BASE=`echo "${BASE_IMG}" | sed 's/\/.*//'`
 IMG=`echo "${BASE_IMG}" | sed 's/.*\///'`
-TAG=`echo "${BASE_IMG_TAG}" | sed "s/.*://"`
+TAG=$(echo "${BASE_IMG_TAG}" | sed "s/.*://" | sed -e 's/\//-/g')
 if [ ! -n "$TAG" ] || [ "${TAG}" == "${IMG}" ]; then
     TAG=latest
 fi
